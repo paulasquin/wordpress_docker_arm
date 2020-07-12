@@ -1,28 +1,34 @@
-# set this to a web address if you want to enable tls or host multiple sites
-# eg: justingarrison.com www.justingarrison.com {
-:80 {
+# Caddy v2 CaddyFile, update from rothgar by paulasquin
+
+# Website #1. Replace domain.com with your website url
+domain.com {
+	# Provide path and encoding for website
 	root www
-	gzip
-	# enable tls if you're using DDNS and
-	# have ports 443 and 80 forwarded on your router
-	tls off
-  	# use php container for php files
-	fastcgi / php:9000 php
-	rewrite {
-	    if {path} not_match ^\/wp-admin
-	    to {path} {path}/ /index.php?_url={uri}
-	}
+	encode gzip
+	
+	# Enable tls if you're using DDNS and have ports 443 and 80 forwarded on your router
+	# If not, use tls off
+	# tls off
+	# Load certifications for your website
+	tls /cert/live/${DOMAIN_NAME}/fullchain.pem /cert/live/${DOMAIN_NAME}/privkey.pem
+  	
+  	# Use php container for php files
+	php_fastcgi php:9000
+	file_server
+
 }
 
-# optional website 2
-# website2 {
-# 	root www2
-# 	gzip
-#	# tls off
-#   	# use php container for php files
-# 	fastcgi / php:9000 php
-# 	rewrite {
-# 	    if {path} not_match ^\/wp-admin
-# 	    to {path} {path}/ /index.php?_url={uri}
-# 	}
+# Website #2
+# yourwebsite_2.com {
+# 	# Provide path and encoding for website
+# 	root www
+# 	encode gzip
+# 	
+# 	tls /cert/live/${DOMAIN_NAME_2}/fullchain.pem /cert/live/${DOMAIN_NAME_2}/privkey.pem
+#   	
+#   # Use php container for php files. Update port
+# 	php_fastcgi php:9001
+# 	file_server
+# 
 # }
+
