@@ -1,16 +1,27 @@
-version: '2'
+version: '3'
 services:
   caddy:
-    image: rothgar/rpi-caddy:0.9.1
-    #build: caddy
+    # Shadow use of rothgar caddy docker image : upgrade to Caddy V2 for security
+    # image: rothgar/rpi-caddy:0.9.1
+    build: caddy
+
     volumes:
       - "./.data/wp:/srv"
+      # Path to folder containing fullchain.pem and privkey.pem if you'd like to provide HTTPS/SSL service
+      - "${PATH_TO_DOMAIN_CERTS_LIVE}:/cert/live/${DOMAIN_NAME}:ro" 
+      - "${PATH_TO_DOMAIN_CERTS_ARCHIVE}:/cert/archive/${DOMAIN_NAME}:ro"
+
     depends_on:
       - mysql
       - php
+
     ports:
       - "80:80"
       - "443:443"
+
+    env_file:
+      - ./.env 
+
     restart: always
 
   php:
@@ -19,8 +30,10 @@ services:
     links:
       # make sure you change your wp-config
       - mysql:mysql
+
     volumes:
       - "./.data/wp:/srv"
+
     restart: always
 
   mysql:
@@ -29,14 +42,12 @@ services:
     volumes:
       - "./.data/db:/var/lib/mysql"
       - "./.data/backup/1n7:/docker-entrypoint-initdb.d"
-    restart: always
-    environment:
-      # Change for your existing database
-      MYSQL_ROOT_PASSWORD: wordpress
-      # below values should match wp-config
-      MYSQL_DATABASE: blog
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: PASSWORD!!!
+
+    env_file:
+      - ./.env
+
+    restart: always 
+
 
 # Use these images for dynamic DDNS updates
 # For Google domains use http://j.mp/2bRNYET
