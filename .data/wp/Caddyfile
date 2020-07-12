@@ -10,7 +10,7 @@ domain.com {
 	# If not, use tls off
 	# tls off
 	# Load certifications for your website
-	tls /cert/live/${DOMAIN_NAME}/fullchain.pem /cert/live/${DOMAIN_NAME}/privkey.pem
+	tls /cert/live/{$DOMAIN_NAME}/fullchain.pem /cert/live/{$DOMAIN_NAME}/privkey.pem
   	
   	# Use php container for php files
 	php_fastcgi php:9000

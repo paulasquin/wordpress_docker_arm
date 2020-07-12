@@ -8,8 +8,8 @@ services:
     volumes:
       - "./.data/wp:/srv"
       # Path to folder containing fullchain.pem and privkey.pem if you'd like to provide HTTPS/SSL service
-      - "${PATH_TO_DOMAIN_CERTS_LIVE}:/cert/live/${DOMAIN_NAME}:ro" 
-      - "${PATH_TO_DOMAIN_CERTS_ARCHIVE}:/cert/archive/${DOMAIN_NAME}:ro"
+      - "${PATH_TO_CERTS_LIVE}/${DOMAIN_NAME}:/cert/live/${DOMAIN_NAME}:ro" 
+      - "${PATH_TO_CERTS_ARCHIVE}/${DOMAIN_NAME}:/cert/archive/${DOMAIN_NAME}:ro"
 
     depends_on:
       - mysql
