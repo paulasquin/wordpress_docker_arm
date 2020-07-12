@@ -8,9 +8,9 @@ domain.com {
 	
 	# Enable tls if you're using DDNS and have ports 443 and 80 forwarded on your router
 	# If not, use tls off
-	# tls off
+	tls off
 	# Load certifications for your website
-	tls /cert/live/{$DOMAIN_NAME}/fullchain.pem /cert/live/{$DOMAIN_NAME}/privkey.pem
+	# tls /cert/live/{$DOMAIN_NAME}/fullchain.pem /cert/live/{$DOMAIN_NAME}/privkey.pem
   	
   	# Use php container for php files
 	php_fastcgi php:9000
