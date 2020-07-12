@@ -7,12 +7,12 @@ RUN apt-get update && \
 
 # download caddy
 RUN mkdir -p /srv/wordpress && \
-    curl -sL  https://github.com/mholt/caddy/releases/download/v0.9.1/caddy_linux_arm7.tar.gz | \
-    tar xz -C /tmp/ && mv /tmp/caddy_linux_arm7 /usr/local/bin/caddy && \
+    curl -sL  https://github.com/caddyserver/caddy/releases/download/v2.1.1/caddy_2.1.1_linux_armv7.tar.gz | \
+    tar xz -C /tmp/ && mv /tmp/caddy /usr/local/bin/caddy && \
     chmod +x /usr/local/bin/caddy
 
 EXPOSE 80 443
 
 WORKDIR /srv
 
-CMD caddy
+CMD caddy run
