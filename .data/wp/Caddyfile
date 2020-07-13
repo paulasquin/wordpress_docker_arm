@@ -1,14 +1,13 @@
 # Caddy v2 CaddyFile, update from rothgar by paulasquin
 
-# Website #1. Replace domain.com with your website url
-domain.com {
+# Website #1. Replace domain.com with your website url and comment :80 to use SSL certificates
+# domain.com {
+:80 {
 	# Provide path and encoding for website
 	root www
 	encode gzip
 	
 	# Enable tls if you're using DDNS and have ports 443 and 80 forwarded on your router
-	# If not, use tls off
-	tls off
 	# Load certifications for your website
 	# tls /cert/live/{$DOMAIN_NAME}/fullchain.pem /cert/live/{$DOMAIN_NAME}/privkey.pem
   	
