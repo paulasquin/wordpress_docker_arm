@@ -1,7 +1,7 @@
 # Caddy v2 CaddyFile, update from rothgar by paulasquin
 
-# Website #1. Replace domain.com with your website url and comment :80 to use SSL certificates
-# domain.com {
+# Website #1. Replace domain.com with your website url, uncoment the line and comment the :80 line to use SSL certificates
+# {$DOMAIN_NAME} {
 :80 {
 	# Provide path and encoding for website
 	root www
