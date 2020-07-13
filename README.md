@@ -55,7 +55,7 @@ of `.data/wp/Caddyfile`.
 - Uncomment the line with `tls`
 
 
-## Manage the project
+## Start and stop the server
 To run the wordpress services, just type
 ```bash
 docker-compose up -d
@@ -80,6 +80,10 @@ You should be able to configure the wordpress server.
 
 Provide the same information as presented in the .env file, and indicate `mysql` as 
 database host (name of the container hosting the mysql service)
+
+If you configured the project to use SSL, just go to [your_domain.com](your_domain.com)
+If you are not yet using SSL, you'll need to enforce connecting with HTTP protocol.
+For this: [http://your_domain.com](http://your_domain.com)
 
 ![](https://i.ibb.co/njrFZkX/Wordpress-config.png)
 
